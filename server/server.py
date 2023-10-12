@@ -1,9 +1,12 @@
 import os
 import json
 import sys
+import socketserver
+
+HOST, PORT = 'localhost', 17
+
 
 sys.path.append('./lib')
-
 from lib.dynamixel_sdk import *
 
 if os.name == 'nt':
@@ -37,6 +40,7 @@ module_data = json.load(module_data_file)
 
 portHandler = PortHandler(DEVICENAME)
 packetHandler = PacketHandler(PROTOCOL_VERSION)
+
 if portHandler.openPort():
     print("Succeeded to open the port")
 else:
@@ -84,10 +88,8 @@ for module in module_data["devices"]:
 
                             if register["reg"] == 28:
                                 value = float(value * 1.0) * 0.1
-                                print("\tBLYATPOINT")
                             if register["reg"] == 36:
                                 value /= 100.0
-                                print("\tBLYATPOINT")
                         elif id == 22:
                             if register["reg"] == 24:
                                 humid_dec , dxl_comm_result, dxl_error = packetHandler.read1ByteTxRx(portHandler, id, 26)
@@ -99,12 +101,6 @@ for module in module_data["devices"]:
                         packetHandler.write1ByteTxRx(portHandler, id, 42, 0)
                         colorSensorFlag = False
                     print("\t{title} : {val} {si}".format(title = register["name"], val = value, si = register["si"]))
-
-
-
-
-
-# Close port
 portHandler.closePort()
 
 
