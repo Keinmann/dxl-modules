@@ -1,0 +1,169 @@
+{
+	"devices": [
+		{
+			"id": 3,
+			"title": "Button",
+			"registers": [
+				{
+					"name": "Button Status",
+					"type": "r",
+					"reg": 27,
+					"bytes": 1,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 4,
+			"title": "Color Sensor",
+			"registers": {
+				"name": "Darkness",
+				"type": "r",
+				"reg": 32,
+				"bytes": 2,
+				"si": ""
+			}
+		},
+		{
+			"id": 9,
+			"title": "LED",
+			"registers": []
+		},
+		{
+			"id": 10,
+			"title": "Line Sensor",
+			"registers": [
+				{
+					"name": "Line Status",
+					"type": "r",
+					"reg": 27,
+					"bytes": 1,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 18,
+			"title": "Sound Sensor",
+			"registers": [
+				{
+					"name": "Sound Value",
+					"type": "r",
+					"reg": 26,
+					"bytes": 1,
+					"si": ""
+				},
+				{
+					"name": "Clap Count",
+					"type": "r",
+					"reg": 27,
+					"bytes": 1,
+					"si": ""
+				},
+				{
+					"name": "Last Sound Time",
+					"type": "r",
+					"reg": 28,
+					"bytes": 2,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 19,
+			"title": "Potentiometer",
+			"registers": [
+				{
+					"name": "Potentiometer Value",
+					"type": "r",
+					"reg": 26,
+					"bytes": 2,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 20,
+			"title": "Atm. Pressure",
+			"registers": [
+				{
+					"name": "Pressure",
+					"type": "r",
+					"reg": 24,
+					"bytes": 4,
+					"si": "mmHg"
+				},
+				{
+					"name": "Altitude",
+					"type": "r",
+					"reg": 28,
+					"bytes": 4,
+					"si": ""
+				},
+				{
+					"name": "Temperature",
+					"type": "r",
+					"reg": 36,
+					"bytes": 2,
+					"si": "C"
+				}
+			]
+		},
+		{
+			"id": 21,
+			"title": "RGB LED",
+			"registers": []
+		},
+		{
+			"id": 22,
+			"title": "Temperature/Humidity",
+			"registers": [
+				{
+					"name": "Humidity",
+					"type": "r",
+					"reg": 24,
+					"bytes": 2,
+					"si": ""
+				},
+				{
+					"name": "Temperature",
+					"type": "r",
+					"reg": 28,
+					"bytes": 2,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 23,
+			"title": "Limit Sensor",
+			"registers": [
+				{
+					"name": "Limit Status",
+					"type": "r",
+					"reg": 27,
+					"bytes": 1,
+					"si": ""
+				}
+			]
+		},
+		{
+			"id": 24,
+			"title": "Sound Emmiter",
+			"registers": []
+		},
+		{
+			"id": 25,
+			"title": "Light Sensor",
+			"registers": [
+				{
+					"name": "Brightness",
+					"type": "r",
+					"reg": 26,
+					"bytes": 2,
+					"si": ""
+				}
+			]
+		}
+	]
+}
