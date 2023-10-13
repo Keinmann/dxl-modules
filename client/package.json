@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-native-tcp-socket": "^6.0.6",
     "react-props": "^0.0.3",
     "sass": "^1.69.3",
     "scss": "^0.2.4"

@@ -42,6 +42,7 @@ DEVICENAME                  = '/dev/ttyS2'\
 DXL_ID = 3
 
 module_data_file = open('./metadata.json')
+# module_data = json.load(module_data_file)
 
 portHandler = PortHandler(DEVICENAME)
 packetHandler = PacketHandler(PROTOCOL_VERSION)
@@ -64,14 +65,14 @@ def scanDevices():
         quit()
 
     # print("Scanning port {port} with baudrate {baud}".format(port = DEVICENAME, baud = BAUDRATE ))
-    deviceindex = 0
     for module in module_data["devices"]:
         id, dxl_comm_result, dxl_error = packetHandler.read1ByteTxRx(portHandler, module["id"], DXL_ID)
         if (id == module["id"]):
+            device_index = 0
             for device in module_data["devices"]:
                 if device["id"] == id:
-                    print("[{id}]{device}".format(device = device["title"], id = id))
-                    regindex = 0
+                    # print("[{id}]{device}".format(device = device["title"], id = id))
+                    register_index = 0
                     for register in device["registers"]:
                         colorSensorFlag = False
                         if id == 4:
@@ -87,9 +88,8 @@ def scanDevices():
                             value, dxl_comm_result, dxl_error = packetHandler.read4ByteTxRx(portHandler, id, register["reg"])
                             if id == 20:
                                 if register["reg"] == 24:
-                                    print("\t{title} : {val} {si}".format(title = register["name"], val = value/1000.0, si = "kPa"))
+                                    # print("\t{title} : {val} {si}".format(title = register["name"], val = value/1000.0, si = "kPa"))
                                     value = (float(value) * 7.452) / 1000
-
                                 if register["reg"] == 28:
                                     value = float(value * 1.0) * 0.1
                                 if register["reg"] == 36:
@@ -104,16 +104,14 @@ def scanDevices():
                         if colorSensorFlag == True:
                             packetHandler.write1ByteTxRx(portHandler, id, 42, 0)
                             colorSensorFlag = False
-                        print("\t{title} : {val} {si}".format(title = register["name"], val = value, si = register["si"]))
-                        device["registers"][regindex]['value'] = value
-                        module_data["devices"][deviceindex] = device
-                        regindex = regindex + 1
-                        
-            else:
-                module_data["devices"].pop(deviceindex)
-        deviceindex = deviceindex+1                   
+                        # print("\t{title} : {val} {si}".format(title = register["name"], val = value, si = register["si"]))
+                        register["value"] = value
+                        device["registers"][register_index] = register
+                        register_index = register_index + 1 
+                module_data["devices"][device_index] = device        
+                device_index = device_index + 1                     
     portHandler.closePort()
-    print(module_data)
+    return module_data
 
 while True:
     conn, addr = socket.accept()
@@ -123,9 +121,11 @@ while True:
     if not data:
         break
     if data.decode() == "hello":
+        
         conn.sendall("world".encode())
     elif data.decode() == "all":
-        scanDevices()       
+        json_data = json.dumps(scanDevices())
+        conn.sendall(json_data.encode())       
     else:
         conn.sendall(data)    
 

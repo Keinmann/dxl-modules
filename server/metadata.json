@@ -16,13 +16,15 @@
 		{
 			"id": 4,
 			"title": "Color Sensor",
-			"registers": {
-				"name": "Darkness",
-				"type": "r",
-				"reg": 32,
-				"bytes": 2,
-				"si": ""
-			}
+			"registers": [
+				{
+					"name": "Darkness",
+					"type": "r",
+					"reg": 32,
+					"bytes": 2,
+					"si": ""
+				}
+			]
 		},
 		{
 			"id": 9,
