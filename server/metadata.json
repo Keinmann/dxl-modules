@@ -89,7 +89,7 @@
 			"title": "Atm. Pressure",
 			"registers": [
 				{
-					"name": "Pressure",
+					"name": "Давление",
 					"type": "r",
 					"reg": 24,
 					"bytes": 4,
