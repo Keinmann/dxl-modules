@@ -1,10 +1,19 @@
 .app {
 	display: flex;
 	flex-direction: column;
-	max-width: 250px;
+	margin: 0 auto;
+	max-width: 800px;
+	justify-content: center;
 	&_header {
+		text-align: center;
+		&-error {
+			color: #833;
+		}
 	}
 	&_content {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
 	}
 }
 

@@ -54,7 +54,6 @@ def scanDevices():
             device_index = 0
             for device in data["devices"]:
                 if device["id"] == id:
-                    # print("[{id}]{device}".format(device = device["title"], id = id))
                     register_index = 0
                     for register in device["registers"]:
                         colorSensorFlag = False
@@ -71,7 +70,6 @@ def scanDevices():
                             value, dxl_comm_result, dxl_error = packetHandler.read4ByteTxRx(portHandler, id, register["reg"])
                             if id == 20:
                                 if register["reg"] == 24:
-                                    # print("\t{title} : {val} {si}".format(title = register["name"], val = value/1000.0, si = "kPa"))
                                     value = "{:.2f}".format(round((value * 7.452) / 1000, 2))
                                 if register["reg"] == 28:
                                     value = "{:.2f}".format(round(float(value * 1.0) * 0.1 , 2))
@@ -87,7 +85,6 @@ def scanDevices():
                         if colorSensorFlag == True:
                             packetHandler.write1ByteTxRx(portHandler, id, 42, 0)
                             colorSensorFlag = False
-                        # print("\t{title} : {val} {si}".format(title = register["name"], val = value, si = register["si"]))
                         register["value"] = value
                         device["registers"][register_index] = register
                         register_index = register_index + 1 
@@ -96,7 +93,6 @@ def scanDevices():
     portHandler.closePort()
     return data
 
-# print(scanDevices())
 
 class CORSRequestHandler(BaseHTTPRequestHandler):
 
