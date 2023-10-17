@@ -5,13 +5,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 PORT = 8117
 
-# Protocol version
-PROTOCOL_VERSION            = 1.0
-# Default setting
-BAUDRATE                    = 57600
-DEVICENAME                  = '/dev/ttyS2'
-DXL_ID = 3
-
 os.system("rs485 /dev/ttyS2 1")
 os.system("lsof -i :{port}".format(port = PORT))
 sys.path.append('./lib')
@@ -32,6 +25,13 @@ else:
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
+
+# Protocol version
+PROTOCOL_VERSION            = 1.0
+# Default setting
+BAUDRATE                    = 57600
+DEVICENAME                  = '/dev/ttyS2'
+DXL_ID = 3
 
 module_data_file = open('./metadata.json')
 module_data = json.load(module_data_file)

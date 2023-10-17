@@ -89,7 +89,7 @@
 			"title": "Atm. Pressure",
 			"registers": [
 				{
-					"name": "Давление",
+					"name": "Pressure",
 					"type": "r",
 					"reg": 24,
 					"bytes": 4,
@@ -100,7 +100,7 @@
 					"type": "r",
 					"reg": 28,
 					"bytes": 4,
-					"si": ""
+					"si": "m"
 				},
 				{
 					"name": "Temperature",
