@@ -1,9 +1,8 @@
+import Register from "../Register/Register";
 import "./Device.scss";
 import { ReactPropTypes, useEffect, useState } from "react";
 
 function Device({ device }) {
-	const [registers, setRegisters] = useState({ registe: "value" });
-
 	return (
 		<div className="device">
 			<div className="device__header">
@@ -12,17 +11,10 @@ function Device({ device }) {
 				</h4>
 			</div>
 			<div className="device__body">
-				{device.registers?.map((register, index) => (
-					<div className="device__body_register" key={index}>
-						<div className="device__body_register_title">{register.name}</div>
-						<div className="device__body_register_value">
-							{register.value}
-							{register.si}
-						</div>
-					</div>
+				{device.registers?.map((register, key) => (
+					<Register key={key} device={device.id} register={register} />
 				))}
 			</div>
-			<div className="device__footer"></div>
 		</div>
 	);
 }

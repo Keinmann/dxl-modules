@@ -39,6 +39,12 @@ module_data = json.load(module_data_file)
 portHandler = PortHandler(DEVICENAME)
 packetHandler = PacketHandler(PROTOCOL_VERSION)
 
+if not portHandler.openPort():
+    getch()
+    quit()
+if not portHandler.setBaudRate(BAUDRATE):
+    getch()
+    quit()
 
 def scanDevices():
     data = module_data
@@ -89,8 +95,7 @@ def scanDevices():
                         device["registers"][register_index] = register
                         register_index = register_index + 1 
                 data["devices"][device_index] = device        
-                device_index = device_index + 1                     
-    portHandler.closePort()
+                device_index = device_index + 1
     return data
 
 
@@ -118,14 +123,40 @@ class CORSRequestHandler(BaseHTTPRequestHandler):
         formatted_data = json.dumps(data)
         self.wfile.write(formatted_data.encode())
 
-    # def do_POST(self):
-    #     content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
-    #     post_data = self.rfile.read(content_length) # <--- Gets the data itself
-    #     print("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
-    #             str(self.path), str(self.headers), post_data.decode('utf-8'))
+    def do_POST(self):
+        self.send_response(200, "ok")
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        data = self.rfile.read(content_length) # <--- Gets the data itself
+        root = json.loads(data.decode())
+        # print("JSON data:\n", json.dumps(root, indent = 4))
+        print(root["register"]["bytes"], root["device"], root["register"]["reg"], root["value"])
+        if root["register"]["bytes"] == 1:
+            result , error = packetHandler.write1ByteTxRx(portHandler, int(root["device"]), int(root["register"]["reg"]), int(root["value"]))
+        if root["register"]["bytes"] == 2:
+            result , error = packetHandler.write2ByteTxRx(portHandler, int(root["device"]), int(root["register"]["reg"]), int(root["value"]))
+        if root["register"]["bytes"] == 4:
+            result , error = packetHandler.write4ByteTxRx(portHandler, int(root["device"]), int(root["register"]["reg"]), int(root["value"]))
+        self.wfile.write("200".encode())
 
-    #     self._set_response()
-    #     self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+# JSON data:
+#  {
+#     "device": 9,
+#     "value": "50",
+#     "register": {
+#         "name": "Led Brightness",
+#         "type": "w",
+#         "reg": 26,
+#         "bytes": 1,
+#         "si": "",
+#         "min": 0,
+#         "max": 255,
+#         "subtype": "range",
+#         "value": 0
+#     }
+# }
 
 httpd = HTTPServer(('', PORT), CORSRequestHandler)
 httpd.serve_forever()

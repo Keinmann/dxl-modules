@@ -18,7 +18,7 @@ function App() {
 			setData(json.devices);
 			setError("");
 		} catch (err) {
-			setError(JSON.stringify(err));
+			setError("Connection Error Detected");
 		}
 	}
 

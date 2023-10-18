@@ -1,0 +1,19 @@
+.register {
+	padding: 4px;
+	background-color: #444;
+	display: flex;
+	flex-direction: column;
+
+	&-info {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		&_title {
+		}
+		&_value {
+		}
+	}
+	&-control {
+		width: 100%;
+	}
+}

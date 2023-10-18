@@ -29,7 +29,18 @@
 		{
 			"id": 9,
 			"title": "LED",
-			"registers": []
+			"registers": [
+				{
+					"name": "Led Brightness",
+					"type": "w",
+					"reg": 26,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				}
+			]
 		},
 		{
 			"id": 10,
@@ -114,7 +125,38 @@
 		{
 			"id": 21,
 			"title": "RGB LED",
-			"registers": []
+			"registers": [
+				{
+					"name": "Red",
+					"type": "w",
+					"reg": 27,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				},
+				{
+					"name": "Green",
+					"type": "w",
+					"reg": 26,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				},
+				{
+					"name": "Blue",
+					"type": "w",
+					"reg": 28,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				}
+			]
 		},
 		{
 			"id": 22,
@@ -152,7 +194,28 @@
 		{
 			"id": 24,
 			"title": "Sound Emmiter",
-			"registers": []
+			"registers": [
+				{
+					"name": "Frequency",
+					"type": "w",
+					"reg": 26,
+					"bytes": 2,
+					"si": "Hz",
+					"min": 0,
+					"max": 5000,
+					"subtype": "range"
+				},
+				{
+					"name": "Porosity",
+					"type": "w",
+					"reg": 28,
+					"bytes": 2,
+					"si": "%",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				}
+			]
 		},
 		{
 			"id": 25,
