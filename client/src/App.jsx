@@ -1,6 +1,6 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import Logo from "./assets/Logo.svg";
 import "./App.scss";
+import { useState, useEffect } from "react";
 import Device from "./components/Device/Device";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 			});
 			const json = await response.json();
 			setData(json.devices);
-			setError("");
+			setError(" ");
 		} catch (err) {
 			setError("Connection Error Detected");
 		}
@@ -33,7 +33,11 @@ function App() {
 	return (
 		<div className="app">
 			<div className="app_header">
-				<h1>DxlModules</h1>
+				<h1 className="app_header_title">
+					DxlModules
+					<p className="app_header_signature">by Applied Robotics</p>
+					<img className="app_header_img" src={Logo} alt="" />
+				</h1>
 				<p className="app_header-error">{error}</p>
 			</div>
 			<div className="app_content">
