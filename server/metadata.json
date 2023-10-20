@@ -229,6 +229,86 @@
 					"si": ""
 				}
 			]
+		},
+		{
+			"id": 5,
+			"title": "Driver",
+			"registers": [
+				{
+					"name": "Encoder Mode",
+					"type": "w",
+					"reg": 27,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 3,
+					"subtype": "range"
+				},
+				{
+					"name": "Power",
+					"type": "w",
+					"reg": 28,
+					"bytes": 2,
+					"si": "",
+					"min": -1023,
+					"max": 1023,
+					"subtype": "range"
+				},
+				{
+					"name": "Encoder Mode",
+					"type": "r",
+					"reg": 32,
+					"bytes": 2,
+					"si": "ticks"
+				},
+				{
+					"name": "Present Speed",
+					"type": "r",
+					"reg": 34,
+					"bytes": 2,
+					"si": ""
+				},
+				{
+					"name": "Goal Speed",
+					"type": "w",
+					"reg": 40,
+					"bytes": 2,
+					"si": "",
+					"min": -1000,
+					"max": 1000,
+					"subtype": "range"
+				},
+				{
+					"name": "PID P",
+					"type": "w",
+					"reg": 47,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				},
+				{
+					"name": "PID I",
+					"type": "w",
+					"reg": 48,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				},
+				{
+					"name": "PID D",
+					"type": "w",
+					"reg": 49,
+					"bytes": 1,
+					"si": "",
+					"min": 0,
+					"max": 255,
+					"subtype": "range"
+				}
+			]
 		}
 	]
 }

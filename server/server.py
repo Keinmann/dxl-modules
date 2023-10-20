@@ -109,11 +109,6 @@ class CORSRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
-    def _set_response(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-
     def do_GET(self):
         self.send_response(200, "ok")
         self.send_header('Access-Control-Allow-Origin', '*')
@@ -140,23 +135,6 @@ class CORSRequestHandler(BaseHTTPRequestHandler):
         if root["register"]["bytes"] == 4:
             result , error = packetHandler.write4ByteTxRx(portHandler, int(root["device"]), int(root["register"]["reg"]), int(root["value"]))
         self.wfile.write("200".encode())
-
-# JSON data:
-#  {
-#     "device": 9,
-#     "value": "50",
-#     "register": {
-#         "name": "Led Brightness",
-#         "type": "w",
-#         "reg": 26,
-#         "bytes": 1,
-#         "si": "",
-#         "min": 0,
-#         "max": 255,
-#         "subtype": "range",
-#         "value": 0
-#     }
-# }
 
 httpd = HTTPServer(('', PORT), CORSRequestHandler)
 httpd.serve_forever()
