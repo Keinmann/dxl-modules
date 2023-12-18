@@ -22,7 +22,7 @@ function Register({ device, register }) {
 
 	async function writeRegister() {
 		try {
-			const response = await fetch(`http://192.168.42.17:8117/`, {
+			const response = await fetch(`http://manipulator.local:8117/`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

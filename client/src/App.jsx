@@ -8,7 +8,7 @@ function App() {
 	const [error, setError] = useState("");
 	async function getData() {
 		try {
-			const response = await fetch(`http://192.168.42.17:8117/`, {
+			const response = await fetch(`http://manipulator.local:8117/`, {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
